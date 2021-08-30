@@ -1,20 +1,19 @@
 // Imports
 const express = require('express');
-const usersCtrl = require('./routes/user.routes');
-const postCtrl = require('./routes/post.routes');
-const likesPostCtrl = require('./routes/postLike.routes');
-const commentCtrl = require('./routes/comment.routes');
-const likesCommentCtrl = require('./routes/commentLike');
+const usersCtrl = require('./controllers/userCtrl');
+const postCtrl = require('./controllers/postCtrl');
+const likesPostCtrl = require('./controllers/postLikeCtrl');
+const commentCtrl = require('./controllers/commentCtrl');
+const likesCommentCtrl = require('./controllers/commentLikeCtrl');
 
 
 // Router
 exports.router = (function() {
-  var apiRouter = express.Router();
+  const apiRouter = express.Router();
 
 
   apiRouter.use((req, res, next) => { 
-    res.setHeader('Access-Control-Allow-Origin', "https://groupomania.com.imastoridis.com", "http://localhost:3000", "*"); 
-    res.setHeader('Access-Control-Max-Age', "1000")
+    res.setHeader('Access-Control-Allow-Origin', '*'); 
     res.header('Access-Control-Allow-Credentials', true);
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization, client-security-token');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
@@ -22,7 +21,7 @@ exports.router = (function() {
   });
 
   // Users routes
-  apiRouter.route('/users/register/').post(usersCtrl.signup);
+  apiRouter.route('/users/signup/').post(usersCtrl.signup);
   apiRouter.route('/users/login/').post(usersCtrl.login);
   apiRouter.route('/users/me/').get(usersCtrl.getUserProfile);
   apiRouter.route('/users/me/').put(usersCtrl.updateUserProfile);

@@ -2,6 +2,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const apiRouter = require('./apiRouter').router;
+const db = require("./models/index");
+
+db.sequelize.sync();
 
 // Instantiate server
 const server = express();

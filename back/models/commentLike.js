@@ -34,15 +34,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   commentLike.init({
     commentId: DataTypes.INTEGER,
-    references: {
-      model:'comments',
-      key: 'id'
-    },
     userId: DataTypes.INTEGER,
-    references: {
-      model:'users',
-      key: 'id'
-    }
   }, {
     sequelize,
     modelName: 'commentLike',
