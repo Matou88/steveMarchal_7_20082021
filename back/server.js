@@ -1,27 +1,47 @@
-// Imports
-const express = require('express');
-const bodyParser = require('body-parser');
-const apiRouter = require('./apiRouter').router;
-const db = require("./models/index");
+const http = require('http');
+const app = require('./app');
 
-db.sequelize.sync();
+const normalizePort = val => {
+    const port = parseInt(val, 10);
 
-// Instantiate server
-const server = express();
+    if (isNaN(port)) {
+        return val;
+    }
+    if (port >= 0) {
+        return port;
+    }
+    return false;
+};
+const port = normalizePort(process.env.PORT || '3300');
+app.set('port', port);
 
-// Body Parser configuration
-server.use(bodyParser.urlencoded({ extended: true }));
-server.use(bodyParser.json());
+const errorHandler = error => {
+    if (error.syscall !== 'listen') {
+        throw error;
+    }
+    const address = server.address();
+    const bind = typeof address === 'string' ? 'pipe ' + address : 'port: ' + port;
+    switch (error.code) {
+        case 'EACCES':
+            console.error(bind + ' requires elevated privileges.');
+            process.exit(1);
+            break;
+        case 'EADDRINUSE':
+            console.error(bind + ' is already in use.');
+            process.exit(1);
+            break;
+        default:
+            throw error;
+    }
+};
 
-// Configure routes
-server.get('/', function (req, res) {
-    res.setHeader('Content-Type', 'text/html');
-    res.status(200).send('<h1>Bonjour</h1>');
+const server = http.createServer(app);
+
+server.on('error', errorHandler);
+server.on('listening', () => {
+    const address = server.address();
+    const bind = typeof address === 'string' ? 'pipe ' + address : 'port ' + port;
+    console.log('Listening on ' + bind);
 });
 
-server.use('/api/', apiRouter);
-
-// Launch server
-server.listen(8080, function() {
-    console.log('Server en écoute :)');
-});
+server.listen(port);
