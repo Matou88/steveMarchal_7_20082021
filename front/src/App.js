@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { BrowserRouter, Switch, Route} from "react-router-dom";
+import Home from "./pages/Home";
+import Signup from "./pages/Signup";
+import Allposts from "./pages/Allposts";
+import Profile from "./pages/Profile";
+import { hasAuthenticated } from "./services/AuthApi";
+import Auth from "./contexts/auth";
+import AuthenticatedRoute from "./components/AuthenticatedRoute";
 
 function App() {
+
+  const [isAuthenticated, setIsAuthenticated] = useState(hasAuthenticated());
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Auth.Provider value={{ isAuthenticated }}>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/" exact component={ Home } />
+          <Route path="/signup" exact component={ Signup } />
+          <AuthenticatedRoute path="/allposts" exact component={ Allposts } />
+          <AuthenticatedRoute path="/profile" exact component={ Profile } />
+        </Switch>
+      </BrowserRouter>
+    </Auth.Provider>
+    
+    
   );
 }
 

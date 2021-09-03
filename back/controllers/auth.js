@@ -5,12 +5,12 @@ require('dotenv').config();
 const db = require('../models');
 
 exports.signup = (req, res, next) => {
-    // Regexp pour email (au moins 8 caractères dont une majuscule, une minuscule, un chiffre et un caractère spécial
+    // Regexp pour mot de passe (au moins 8 caractères dont une majuscule, une minuscule, un chiffre et un caractère spécial
     if (!/(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/.test(req.body.password)) {
         return res.status(400).json({ error: 'Le mot de passe doit contenir minimum 8 caractères et au minimum une minuscule, une majuscule, un chiffre et un caractère spécial (!@#$%^&*)' })
     }
 
-    // Hashage du mot de pass
+    // Hashage du mot de passe
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
             // Création et sauvegarde de l'user
