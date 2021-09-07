@@ -6,14 +6,13 @@ import Navigation from '../components/Navigation';
 
 const Home = () => {
     return (
-        <div>
+        <div className="login-page">
             <Navigation />
             <Logo1 />
             <div className="login-form">
-                <h1 className="login-title">Se connecter</h1>
+                <h1 className="login-title text-center mt-4 mb-2">Se connecter</h1>
                 <LoginForm />
-            </div>           
-
+            </div>     
         </div>
     );
 };

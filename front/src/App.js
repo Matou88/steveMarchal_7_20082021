@@ -7,12 +7,14 @@ import Profile from "./pages/Profile";
 import { hasAuthenticated } from "./services/AuthApi";
 import Auth from "./contexts/auth";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
+// import axios from "axios";
 
 function App() {
 
   const [isAuthenticated, setIsAuthenticated] = useState(hasAuthenticated());
+
   return (
-    <Auth.Provider value={{ isAuthenticated }}>
+    <Auth.Provider value={{ isAuthenticated, setIsAuthenticated }}>
       <BrowserRouter>
         <Switch>
           <Route path="/" exact component={ Home } />
@@ -22,8 +24,6 @@ function App() {
         </Switch>
       </BrowserRouter>
     </Auth.Provider>
-    
-    
   );
 }
 

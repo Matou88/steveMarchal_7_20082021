@@ -1,0 +1,32 @@
+/** Import Bootstrap functions */
+@import "~bootstrap/scss/functions";
+
+$dark: #010101;
+$light: #fafafa;
+
+$primary: #274db4;
+$secondary: #696b70;
+$info: #009bca;
+$success: #40c019;
+$warning: #d68812;
+$danger: #f00c58;
+
+$body-color: $dark;
+
+$theme-colors: (
+  primary: $primary,
+  secondary: $secondary,
+  info: $info,
+  warning: $warning,
+  danger: $danger,
+  dark: $dark,
+  light: $light,
+  success: $success
+);
+
+$font-family-sans-serif: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$font-family-base:       $font-family-sans-serif !default;
+
+/** Bootstrap navbar fix (https://git.io/fADqW) */
+$navbar-dark-toggler-icon-bg: none;
+$navbar-light-toggler-icon-bg: none;

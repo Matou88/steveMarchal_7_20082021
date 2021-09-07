@@ -1,9 +1,9 @@
 .navigation {
     margin: 26px 0;
     display: flex;
-  
+
     a {
-      color: black;
+      color: whitesmoke;
       text-decoration: none;
       margin: 10px;
       padding: 10px;
@@ -14,11 +14,18 @@
         content: "";
         width: 85%;
         height: 5px;
-        background: $color-1;
+        background: $color-2;
         position: absolute;
         bottom: 1px;
         left: 50%;
         transform: translateX(-50%);
+      }
+    }
+    .logo {
+        width: 40%;
+        margin-left: .7em;
+      @media (min-width: 992px) {
+        width: 20%;
       }
     }
   }

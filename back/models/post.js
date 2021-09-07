@@ -23,14 +23,14 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notNull: {
-          msg: 'Il manque le titre',
+          msg: 'Veuillez ajouter un titre',
         },
         notEmpty: {
-          msg: 'Il manque le titre',
+          msg: 'Veuillez ajouter un titre',
         },
         isValidLength(content) {
           if (content.length > 80) {
-            throw new Error('C\'est un titre pas un roman (max 80 caractères)');
+            throw new Error('Le titre peut au maximum avoir 80 caractères');
           }
         },
       }
@@ -47,7 +47,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         isValidLength(content) {
           if (content.length > 2000) {
-            throw new Error('C\'est un peu trop long, au maximum c\'est 2000 caractères');
+            throw new Error('Texte trop long, 2000 caractères maximum');
           }
         },
       }

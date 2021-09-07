@@ -24,7 +24,7 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 });
-app.use(cors({origin: "http://localhost:3006", credentials: true}));
+app.use(cors({origin: "http://localhost:3000", credentials: true}));
 
 // Utilisation de sequelize
 db.sequelize

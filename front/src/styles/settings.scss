@@ -3,6 +3,24 @@ $color-2: #D1515A;
 $color-3: #AEAEAE;
 $background: #656565;
 
-// *{
-//     background-color: $background;
-// }
+a {
+    text-decoration: none;
+};
+
+label {
+    margin-left: .5em;
+    font-weight: bold;
+}
+
+h1{
+    color: $color-1;
+    text-decoration: $color-2 underline;
+}   
+
+.logo-auth{
+    background-color: $color-3;
+}
+
+.loginForm, .signupForm {
+    background-color: $color-3;
+  }

@@ -1,2 +1,7 @@
+@import "~bootstrap/scss/bootstrap";
+@import "./components/bootstrap.scss";
 @import "./settings";
 @import "./components/navigation";
+@import "./components/loginAndSignupPages.scss";
+@import "./components/allposts.scss";
+@import "./components/profile.scss"
