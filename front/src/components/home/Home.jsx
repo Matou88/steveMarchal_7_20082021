@@ -75,7 +75,7 @@ export default function Home() {
 
   return (
     <div>
-      <Navbar />
+      
       <div className="row justify-content-center ms-2  ">
         <div className="col-12 col-lg-3 ">
           <div>

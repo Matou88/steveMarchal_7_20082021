@@ -4,14 +4,12 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { NavLink } from "react-router-dom";
-import Home from "../home/Home";
+import { NavLink, Redirect } from "react-router-dom";
 
 export default function SignIn() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [errors, setErrors] = useState([]);
-  const [validToken, setValidToken] = useState(false);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -19,10 +17,10 @@ export default function SignIn() {
       .post("http://localhost:3000/api/auth/login", { email, password })
       .then((res) => {
         console.log(res);
-        window.localStorage.setItem("token", res.data.token);
-        window.localStorage.setItem("userId", res.data.userId);
-        setValidToken(true);
-        // window.location = "/home";
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("userId", res.data.userId);
+      }).then(() => {
+        <Redirect to="/" />
       })
       .catch((err) => {
         console.log(err);
@@ -34,7 +32,6 @@ export default function SignIn() {
       });
   };
 
-  if (validToken === false){
     return (
       <div className="loginForm">
           <form action="#" onSubmit={ handleLogin }>
@@ -72,10 +69,4 @@ export default function SignIn() {
       </div>   
     );    
   }
-  else {
-    return(
-      <Home />
-    )
-  }
-}
 
