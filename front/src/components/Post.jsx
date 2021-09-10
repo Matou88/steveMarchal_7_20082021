@@ -31,10 +31,7 @@ const Post = ({ post }) => {
   };
 
   return (
-    <div
-      className="post"
-      style={{ background: isEditing ? "#f3feff" : "white" }}
-    >
+    <div className="post">
       <div className="card-header">
         <h3>{post.author}</h3>
         <em>Posté le {dateParser(post.date)}</em>

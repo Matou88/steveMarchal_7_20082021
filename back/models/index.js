@@ -1,37 +1,18 @@
 'use strict';
+const User = require("../models/user");
+const Post = require("../models/post");
+const Comment = require("../models/comment");
+const Like = require("../models/like");
 
-const fs = require('fs');
-const path = require('path');
-const Sequelize = require('sequelize');
-const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.json')[env];
-const db = {};
+User.hasMany(Post, { onDelete: "CASCADE" });
 
-let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
+Post.belongsTo(User, { foreignKey: "userId", onDelete: "CASCADE" });
+Post.hasMany(Comment, { onDelete: "CASCADE" });
 
-fs
-  .readdirSync(__dirname)
-  .filter(file => {
-    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
-  })
-  .forEach(file => {
-    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
-    db[model.name] = model;
-  });
+Comment.belongsTo(Post, { foreignKey: "postId", onDelete: "CASCADE" });
+Comment.belongsTo(User, { foreignKey: "userId", onDelete: "CASCADE" });
 
-Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
-  }
-});
+Like.belongsTo(Post, { foreignKey: "postId", onDelete: "CASCADE" });
+Like.belongsTo(User, { foreignKey: "userId", onDelete: "CASCADE" });
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
-
-module.exports = db;
+module.exports = { User, Post, Comment, Like };

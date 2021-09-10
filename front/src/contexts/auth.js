@@ -1,6 +1,6 @@
-import React from 'react';
+// import React from 'react';
 
-export default React.createContext({
-    isAuthenticated: false,
-    setIsAuthenticated: value => {}
-});
+// export default React.createContext({
+//     isAuthenticated: true,
+//     setIsAuthenticated: value => {}
+// });

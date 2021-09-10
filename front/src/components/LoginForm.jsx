@@ -39,24 +39,23 @@ const LoginForm = (props) => {
                 password
             })
                 .then(res => {
-                    console.log(res.data);
-                    // const token = res.data;
-
-                    function setAxiosToken(token) {
-                        axios.defaults.headers["Authorization"] = "Bearer " + token;
-                    }
-                    setAxiosToken();
-                    // window.location.href = "/allposts";
+                    console.log(res);
+                    window.localStorage.setItem("token", res.data.token);
+                    window.localStorage.setItem("userId", res.data.userId);
+                    window.location.href = "/posts";
                 })
+
+                
                 .catch(err => {
                     let errorsTmp = {};
-                    if (err.response.data.error.errors) {
-                        for (let error of err.response.data.error.errors) {
-                            errorsTmp[error.path] = error.message;
-                        }
-                    } else if (err.response.data.error) {
-                        errorsTmp['g'] = err.response.data.error;
-                    }
+                    // if (err.response.data.error.errors) {
+                    //     for (let error of err.response.data.error.errors) {
+                    //         errorsTmp[error.path] = error.message;
+                    //     }
+                    // } else if (err.response.data.error) {
+                    //     errorsTmp['g'] = err.response.data.error;
+                    // }
+                    
                     setErrors( errorsTmp );
                 })
         }
@@ -79,7 +78,7 @@ const LoginForm = (props) => {
                     ) : '' }               
 
                     <div className="form-group mb-2">
-                        <label for="email">Email</label>
+                        <label htmlFor="email">Email</label>
                         <input type="email" name="email" id="email" className="form-control login-input" placeholder="Votre email" value={ email } onChange={ handleChangeEmail }/>
                     {errors['email'] ? (
                         <span className="login-form__error">{errors['email']}</span>
@@ -87,7 +86,7 @@ const LoginForm = (props) => {
                     </div>
 
                     <div className="form-group mb-2">
-                        <label for="password">Password</label>                    
+                        <label htmlFor="password">Password</label>                    
                     <input type="password" name="password" id="password" className="form-control login-input" placeholder="Votre mot de passe" value={ password } onChange={ handleChangePassword } />
                     {errors['password'] ? (
                         <span className="login-error">{errors['password']}</span>

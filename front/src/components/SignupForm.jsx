@@ -10,14 +10,14 @@ const SignupForm = (props) => {
     
 
     const handleValidation = () => {
-        let { fields } = this.state;
+        // let { fields } = this.state;
         let formIsValid = true
         let errorsTmp = {};
 
         // Email validation
         if (!email) {
             errorsTmp['email'] = 'L\'email doit être renseigné';
-        } else if (!fields['email'].match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/i)) {
+        } else if (!email.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/i)) {
             errorsTmp['email'] = 'L\'email n\'est pas valide';
         }
 
@@ -43,18 +43,32 @@ const SignupForm = (props) => {
         return formIsValid;
     }
 
-    const handleFormSubmit = (event) => {
+    const handleFormSubmit = async (event) => {
         event.preventDefault();
+        // if (handleValidation()) {
+        //     axios.post('http://localhost:3300/api/auth/signup', {
+        //         email,
+        //         username,
+        //         password
+        //     })
+        //         .then(res => {
+        //             console.log(res);
+        //             window.location.href = "/";
+        //         })
         if (handleValidation()) {
-            axios.post('http://localhost:3300/api/auth/signup', {
-                email,
-                username,
-                password
-            })
-                .then(res => {
-                    window.location.href = "/login";
-                })
-                .catch(err => {
+            const res = await axios({
+                method: "post",
+                url: `http://localhost:3300/api/auth/signup`,
+                data: {
+                  username,
+                  email,
+                  password
+                },
+            }).then((result) => {
+                if (result.isConfirmed) {
+                  props.func();
+                }
+              }).catch(err => {
                     let errorsTmp = {};
                     for (let error of err.response.data.error.errors) {
                         errorsTmp[error.path] = error.message;
@@ -65,13 +79,13 @@ const SignupForm = (props) => {
     }
 
     const handleChangeEmail = (event) => {
-        setEmail(event.target.value.trim());
+        setEmail(event.target.value);
     }
     const handleChangePassword = (event) => {
-        setPassword(event.target.value.trim());
+        setPassword(event.target.value);
     }
     const handleChangeUsername = (event) => {
-        setUsername(event.target.value.trim());
+        setUsername(event.target.value);
     }
 
     return (

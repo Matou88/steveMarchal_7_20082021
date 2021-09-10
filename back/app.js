@@ -6,44 +6,47 @@ const path = require('path');
 
 require('dotenv').config();
 
-const app = express();
-const db = require('./models');
+const app = express(); //Applique le framework express
+// const db = require('./models');
 
-const authRoutes = require('./routes/auth');
-const postRoutes = require('./routes/post');
-const commentRoutes = require('./routes/comment');
-const userRoutes = require('./routes/user');
+//Importation des routes
+const postRoutes = require("./routes/post");
+const userRoutes = require("./routes/user");
+const commentRoutes = require("./routes/comment");
+const likeRoutes = require("./routes/like");
 
-// Sécurité du http
-app.use(helmet());
+app.use(helmet()); // Sécurité du http
 
-// CORS
+// Paramètres d'en-tête
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+    res.setHeader("Access-Control-Allow-Origin", "*"); //Permet l'accès à l'API depuis n'importe quelle origine
+    res.setHeader(
+      //Autorise les en-têtes spécifiés
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
+    );
+    res.setHeader(
+      //Permet l'utilisation des méthodes définies ci-dessous
+      "Access-Control-Allow-Methods",
+      "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+    );
     next();
-});
-app.use(cors({origin: "http://localhost:3000", credentials: true}));
+  });
 
-// Utilisation de sequelize
-db.sequelize
-    .authenticate()
-    .then(() => {
-        console.log('Connecté à la base de données :) ');
-    })
-    .catch(error => {
-        console.log('Unable to connect to the database : ', error);
-    })
+app.use(cors()); // CORS - partage de ressources entre serveurs
 
 // Pour parser
 app.use(bodyParser.json());
 
-app.use('/images', express.static(path.join(__dirname, 'images')));
+//Permet de récupérer le corps de la requête au format json
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-app.use('/api/auth', authRoutes);
-app.use('/api/post', postRoutes);
-app.use('/api/comment', commentRoutes);
-app.use('/api/user', userRoutes);
+//Definition des routes
+app.use("/images", express.static(path.join(__dirname, "images")));
+app.use("/api/auth", userRoutes);
+app.use("/api/post", postRoutes);
+app.use("/api/comment", commentRoutes);
+app.use("/api/like", likeRoutes);
 
 module.exports = app;

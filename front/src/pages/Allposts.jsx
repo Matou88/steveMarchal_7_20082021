@@ -24,6 +24,9 @@ const Allposts = () => {
   
         axios
           .post("http://localhost:3300/api/post", {
+            headers: {
+              Authorization: localStorage.getItem('token'),
+            },
             author,
             content,
             date: Date.now(),

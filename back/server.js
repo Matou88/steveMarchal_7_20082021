@@ -1,5 +1,6 @@
 const http = require('http');
 const app = require('./app');
+const path = require('path');
 
 const normalizePort = val => {
     const port = parseInt(val, 10);
@@ -12,7 +13,7 @@ const normalizePort = val => {
     }
     return false;
 };
-const port = normalizePort(process.env.PORT || '3300');
+const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 const errorHandler = error => {
@@ -45,3 +46,11 @@ server.on('listening', () => {
 });
 
 server.listen(port);
+
+// app.get('/*', function(req, res) {
+//     res.sendFile(path.join(__dirname, '../front/public/index.html'), function(err) {
+//       if (err) {
+//         res.status(500).send(err)
+//       }
+//     })
+//   })
