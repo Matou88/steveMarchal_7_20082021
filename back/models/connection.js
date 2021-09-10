@@ -4,7 +4,7 @@ const env = process.env.NODE_ENV || 'development';
 
 //connection à la base de données
 const database = new Sequelize(
-  `mysql://${process.env.SQL_USER}:${process.env.SQL_PASS}@${process.env.SQL_HOST}/${process.env.SQL_NAME}`
+  `mysql://${process.env.SQL_USER}:${process.env.SQL_PASS}@${process.env.SQL_HOST}:${process.env.SQL_PORT}/${process.env.SQL_NAME}`
 );
 
 database
