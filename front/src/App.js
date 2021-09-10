@@ -7,16 +7,16 @@ import Post from "./components/post/Post";
 import PostSelected from "./components/post/PostSelected";
 import ProfileSelected from "./components/profile/ProfileSelected";
 import SignUp from "./components/log/SignUp";
-import PrivateRoute from "./components/PrivateRoute";
+import PrivateRoute from "./components/AuthenticatedRoute";
 
 function App() {
     return (
       <>
         <Router>
           <Switch>
-            <PrivateRoute path="/" component={ Home } />
-            <Route path="/login" component={Authentification} />
+            <Route path="/login" component={ Authentification } />
             <Route path="/signup" component={ SignUp } />
+            <PrivateRoute path="/" component={ Home } />
             <PrivateRoute path="/profile" component={ Profile } />
             <PrivateRoute path="/profileSelected" component={ ProfileSelected } />
             <PrivateRoute path="/post" component={ Post } />

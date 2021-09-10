@@ -7,6 +7,7 @@ import ProfileCardMember from "../profile/ProfileCardMember";
 import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Navigation from "../Navigation";
 
 export default function Home() {
   const [users, setUsers] = useState([]);
@@ -75,7 +76,7 @@ export default function Home() {
 
   return (
     <div>
-      
+      <Navigation />
       <div className="row justify-content-center ms-2  ">
         <div className="col-12 col-lg-3 ">
           <div>

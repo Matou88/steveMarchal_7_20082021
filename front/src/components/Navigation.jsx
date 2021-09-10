@@ -1,36 +1,36 @@
-import React, { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
-import { useState, useEffect } from "react";
-import jwt_decode from "jwt-decode";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignInAlt } from "@fortawesome/free-solid-svg-icons";
+import React, { useState, useEffect } from 'react';
+import { NavLink, useHistory } from 'react-router-dom';
 import Swal from "sweetalert2";
+import jwt_decode from "jwt-decode";
 
 
 const Navigation = () => {
-    const [validToken, setValidToken] = useState(false);
+    const history = useHistory();
+    const [validToken, setValidToken] = useState(null);
     const token = localStorage.getItem("token");
   
     const isMyTokenValid = () => {
-      if (localStorage.getItem("token")) {
-        const decodedToken = jwt_decode(localStorage.getItem("token"));
+      if (token) {
+        const decodedToken = jwt_decode(token);
         const dateNow = new Date();
         if (decodedToken.exp > dateNow / 1000) {
           setValidToken(true);
         } else {
+            setValidToken(false);
           localStorage.clear();
-          window.location = "/";
         }
-      } else {
-        setValidToken(false);
+      
+      }
+      else {
+          setValidToken(false);
       }
     };
   
     useEffect(() => {
       isMyTokenValid();
     }, []);
-
-    function Logout() {
+  
+    const Logout = () => {
         Swal.fire({
           title: "Êtes-vous sûr(e) de vouloir vous déconnecté(e) ?",
           icon: "warning",
@@ -40,15 +40,15 @@ const Navigation = () => {
           confirmButtonColor: "#3085d6",
           cancelButtonColor: "#d33",
         }).then((result) => {
+          console.log(result);
           if (result.isConfirmed) {
             localStorage.clear();
-            return (window.location.href = "/");
+            history.replace('/login');
           }
         });
-      }
+      }    
     
-    
-    if (token === null || validToken === false) {
+    if (!validToken) {
         return (
             <div className="navigation navbar sticky-top navbar-dark bg-dark mt-0 mb-0">
                 <img src="./images/3.svg" alt="Petit logo groupomania" className="logo me-lg-4" />
@@ -85,11 +85,12 @@ const Navigation = () => {
                             <NavLink to={"/profile"} className="nav-link">
                                 Mon profil
                             </NavLink>
-                            <FontAwesomeIcon
-                            icon={faSignInAlt}
-                            className="nav-icon"
-                            onClick={Logout}
-                            />             
+                            <button onClick={Logout}>Déconnexion</button>
+                            {/* <FontAwesomeIcon
+                              icon={faSignInAlt}
+                              className="nav-icon"
+                              onClick={Logout}
+                            />              */}
                         </div>
                     </nav>
                 </div>

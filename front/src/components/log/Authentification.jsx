@@ -3,7 +3,7 @@ import SignIn from "./SignIn";
 import Logo1 from "../Logo1";
 import Navigation from "../Navigation";
 
-export default function Authentification() {
+function Authentification() {
   return (
     <div className="login-page">
       <Navigation />
@@ -15,3 +15,5 @@ export default function Authentification() {
     </div>
   );
 }
+
+export default Authentification;

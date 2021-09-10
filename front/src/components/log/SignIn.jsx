@@ -4,9 +4,10 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { NavLink, Redirect } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 export default function SignIn() {
+  const history = useHistory();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [errors, setErrors] = useState([]);
@@ -19,8 +20,7 @@ export default function SignIn() {
         console.log(res);
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("userId", res.data.userId);
-      }).then(() => {
-        <Redirect to="/" />
+        history.replace('/');
       })
       .catch((err) => {
         console.log(err);
@@ -30,7 +30,7 @@ export default function SignIn() {
           text: "Email ou password incorrect !!",
         });
       });
-  };
+    };
 
     return (
       <div className="loginForm">
@@ -69,4 +69,3 @@ export default function SignIn() {
       </div>   
     );    
   }
-
