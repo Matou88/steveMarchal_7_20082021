@@ -23,21 +23,20 @@ export default function ProfileUpdate(props) {
     const token = localStorage.getItem("token");
     const userId = localStorage.getItem("userId");
 
-    axios
-      .put("http://localhost:3000/api/auth/profile/" + userId, modification, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        window.location.reload();
-      })
-      .catch((err) => {
-        console.log(err);
-        window.alert(
-          "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
-        );
-      });
+    axios.put("http://localhost:3000/api/auth/profile/" + userId, modification, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => {
+      window.location.reload();
+    })
+    .catch((err) => {
+      console.log(err);
+      window.alert(
+        "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
+      );
+    });
   };
 
   const handleRegisterPassword = async (e) => {

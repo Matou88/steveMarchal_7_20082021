@@ -5,11 +5,10 @@ import ProfileCard from "../components/profile/ProflieCard";
 import ProfileCardMember from "../components/profile/ProfileCardMember";
 import axios from "axios";
 import { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Navigation from "../components/Navigation";
 
 export default function Home() {
-  const history = useHistory();
   const [users, setUsers] = useState([]);
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState([]);
@@ -18,54 +17,51 @@ export default function Home() {
     const token = localStorage.getItem("token");
     const userId = localStorage.getItem("userId");
 
-    axios
-      .get("http://localhost:3000/api/auth/profile/" + userId, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        setUser(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-        window.alert(
-          "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
-        );
-      });
+    axios.get("http://localhost:3000/api/auth/profile/" + userId, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => {
+      setUser(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+      window.alert(
+        "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
+      );
+    });
   };
 
   const getAllProfile = () => {
-    axios
-      .get("http://localhost:3000/api/auth/profile")
-      .then((res) => {
-        setUsers(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-        window.alert(
-          "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
-        );
-      });
+    axios.get("http://localhost:3000/api/auth/profile")
+    .then((res) => {
+      setUsers(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+      window.alert(
+        "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
+      );
+    });
   };
 
   const getAllPosts = () => {
     const token = localStorage.getItem("token");
-    axios
-      .get("http://localhost:3000/api/post", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        setPosts(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-        alert(
-          "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
-        );
-      });
+    axios.get("http://localhost:3000/api/post", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => {
+      setPosts(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+      alert(
+        "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
+      );
+    });
   };
 
   useEffect(() => {
@@ -82,7 +78,6 @@ export default function Home() {
           <div>
             <ProfileCard name={user.username} image={user.image} />
           </div>
-
           <div className="fw-bold mb-2 ms-2 ">MEMBRES</div>
           <div className="row">
             {users.map((user) => (

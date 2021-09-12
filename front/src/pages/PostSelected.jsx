@@ -24,21 +24,20 @@ export default function PostSelected({ match, props }) {
 
   const getLikes = () => {
     const token = localStorage.getItem("token");
-    axios
-      .get("http://localhost:3000/api/like/post/" + postId, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        setLikes(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-        window.alert(
-          "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
-        );
-      });
+    axios.get("http://localhost:3000/api/like/post/" + postId, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => {
+      setLikes(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+      window.alert(
+        "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
+      );
+    });
   };
 
   useEffect(() => {
@@ -48,23 +47,22 @@ export default function PostSelected({ match, props }) {
   const isLiked = () => {
     const token = localStorage.getItem("token");
     const userID = Number(localStorage.getItem("userId"));
-    axios
-      .get("http://localhost:3000/api/like/" + postId + "/like/" + userID, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        if (res.data !== null) {
-          setIsItLiked(false);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        window.alert(
-          "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
-        );
-      });
+    axios.get("http://localhost:3000/api/like/" + postId + "/like/" + userID, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => {
+      if (res.data !== null) {
+        setIsItLiked(false);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      window.alert(
+        "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
+      );
+    });
   };
 
   useEffect(() => {
@@ -73,45 +71,42 @@ export default function PostSelected({ match, props }) {
 
   const doLike = () => {
     const token = localStorage.getItem("token");
-    axios
-      .post(
-        "http://localhost:3000/api/like/post/" + postId,
-        { like: isItLiked },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((res) => {
-        window.location.reload();
-      })
-      .catch((err) => {
-        console.log(err);
-        window.alert(
-          "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
-        );
-      });
+    axios.post(
+      "http://localhost:3000/api/like/post/" + postId,
+      { like: isItLiked },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+    .then((res) => {
+      window.location.reload();
+    })
+    .catch((err) => {
+      console.log(err);
+      window.alert(
+        "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
+      );
+    });
   };
 
   const getOnePost = () => {
     const token = localStorage.getItem("token");
-
-    axios
-      .get("http://localhost:3000/api/post/" + postId, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        setPost(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-        window.alert(
-          "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
-        );
-      });
+    axios.get("http://localhost:3000/api/post/" + postId, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => {
+      setPost(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+      window.alert(
+        "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
+      );
+    });
   };
 
   function deletePost() {
@@ -128,21 +123,20 @@ export default function PostSelected({ match, props }) {
       if (result.isConfirmed) {
         const token = localStorage.getItem("token");
 
-        axios
-          .delete("http://localhost:3000/api/post/" + postId, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          })
-          .then((res) => {
-            window.location = "/";
-          })
-          .catch((err) => {
-            console.log(err);
-            window.alert(
-              "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
-            );
-          });
+        axios.delete("http://localhost:3000/api/post/" + postId, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          window.location = "/";
+        })
+        .catch((err) => {
+          console.log(err);
+          window.alert(
+            "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
+          );
+        });
       }
     });
   }
@@ -154,21 +148,20 @@ export default function PostSelected({ match, props }) {
   const getAllComments = () => {
     const token = localStorage.getItem("token");
 
-    axios
-      .get("http://localhost:3000/api/comment/" + postId, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        setComments(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-        window.alert(
-          "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
-        );
-      });
+    axios.get("http://localhost:3000/api/comment/" + postId, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => {
+      setComments(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+      window.alert(
+        "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
+      );
+    });
   };
 
   useEffect(() => {

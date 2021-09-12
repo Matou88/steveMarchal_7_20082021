@@ -3,6 +3,19 @@ $color-2: #D1515A;
 $color-3: #AEAEAE;
 $background: #656565;
 
+@font-face {
+    font-family: rubik;
+    src:
+    url("./fonts/Rubik-Medium.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+* {
+    font-family: rubik;
+}
+
 a {
     text-decoration: none;
 };

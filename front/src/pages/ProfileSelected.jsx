@@ -16,21 +16,20 @@ export default function ProfileSelected({ match, props }) {
   const getOneProfile = () => {
     const token = localStorage.getItem("token");
 
-    axios
-      .get("http://localhost:3000/api/auth/profile/" + userId, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        setUser(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-        window.alert(
-          "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
-        );
-      });
+    axios.get("http://localhost:3000/api/auth/profile/" + userId, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => {
+      setUser(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+      window.alert(
+        "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
+      );
+    });
   };
 
   const deleteProfil = () => {
@@ -46,23 +45,22 @@ export default function ProfileSelected({ match, props }) {
     }).then((result) => {
       if (result.isConfirmed) {
         const token = localStorage.getItem("token");
-        axios
-          .delete("http://localhost:3000/api/auth/profile/" + userId, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          })
-          .then((res) => {
-            return (window.location.href = "/home");
-          })
-          .catch((err) => {
-            console.log(err);
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Il est impossible de supprimer le compte d\'un de vos collègues, mais votre doigt a dérapé j\'en suis certain... ^^',
-            });            
-          });
+        axios.delete("http://localhost:3000/api/auth/profile/" + userId, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          return (window.location.href = "/home");
+        })
+        .catch((err) => {
+          console.log(err);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Il est impossible de supprimer le compte d\'un de vos collègues, mais votre doigt a dérapé j\'en suis certain... ^^',
+          });            
+        });
       }
     });
   };
@@ -73,21 +71,20 @@ export default function ProfileSelected({ match, props }) {
 
   const getAllPostsByUser = () => {
     const token = localStorage.getItem("token");
-    axios
-      .get("http://localhost:3000/api/post/user/" + userId, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        setPosts(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-        alert(
-          "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
-        );
-      });
+    axios.get("http://localhost:3000/api/post/user/" + userId, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => {
+      setPosts(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+      alert(
+        "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
+      );
+    });
   };
 
   useEffect(() => {
@@ -126,10 +123,7 @@ export default function ProfileSelected({ match, props }) {
               <div className="border-bottom mb-2 fw-bold">Biographie</div>
               <div className="btn_delete mb-4">
                 {user.bio}
-                <i
-                  className="bi bi-pencil-square ms-2"
-                  title="Modifier le poste"
-                ></i>
+                <i className="bi bi-pencil-square ms-2" title="Modifier le poste"></i>
               </div>
             </div>
           </div>

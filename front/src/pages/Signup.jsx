@@ -65,10 +65,9 @@ export default function SignUp(props) {
         <form action="" method="post" noValidate onSubmit={ handleRegister }>
           {errors['g'] ? (
             <div className="login-error">
-                { errors['g'] }
+              { errors['g'] }
             </div>
-          ) : '' }
-              
+          ) : '' }    
           <div className="form-group mx-2 mb-2 mb-lg-4">
             <i className="fas fa-user"><FontAwesomeIcon icon={faUser} /></i>
             <label for="username">Nom d'utilisateur</label> 
@@ -106,7 +105,7 @@ export default function SignUp(props) {
           </div>
 
           <div className="text-center">
-              <button type="submit" value="Sign up" className="btn btn-danger mt-2 mb-2 center btn-block">S'inscrire</button>
+            <button type="submit" value="Sign up" className="btn btn-danger mt-2 mb-2 center btn-block">S'inscrire</button>
           </div>
         </form>
         <div className="no-signup text-center">

@@ -8,41 +8,41 @@ exports.likePost = (req, res, next) => {
   const postId = req.params.id;
 
   Post.findOne({ where: { id: postId } })
-    .then((post) => {
-      if (!post) {
-        return res.status(404).json({ error: "Post introuvable !" });
-      } else if (isliked) {
-        Like.create({ userId: userId, postId: postId })
-          .then((like) => {
-            post
-              .update({ likes: post.likes + 1 })
-              .then((post) => res.status(201).json({ message: "Post liké" }))
-              .catch((error) =>
-                res.status(500).json({ error: " Erreur update post" })
-              );
-          })
-          .catch((error) => res.status(400).json({ error }));
-      } else if (!isliked) {
-        Like.destroy({
-          where: {
-            userId: userId,
-            PostId: postId,
-          },
+  .then((post) => {
+    if (!post) {
+      return res.status(404).json({ error: "Post introuvable !" });
+    } else if (isliked) {
+      Like.create({ userId: userId, postId: postId })
+        .then((like) => {
+          post
+            .update({ likes: post.likes + 1 })
+            .then((post) => res.status(201).json({ message: "Post liké" }))
+            .catch((error) =>
+              res.status(500).json({ error: " Erreur update post" })
+            );
         })
-          .then((like) => {
-            post
-              .update({ likes: post.likes - 1 })
-              .then((post) => res.status(201).json({ message: "Post disliké" }))
-              .catch((error) =>
-                res.status(500).json({ error: " Erreur update post" })
-              );
-          })
-          .catch((error) =>
-            res.status(400).json({ message: "problème destroy like" })
-          );
-      }
-    })
-    .catch((error) => res.status(400).json({ message: "erreur destroy" }));
+        .catch((error) => res.status(400).json({ error }));
+    } else if (!isliked) {
+      Like.destroy({
+        where: {
+          userId: userId,
+          PostId: postId,
+        },
+      })
+        .then((like) => {
+          post
+            .update({ likes: post.likes - 1 })
+            .then((post) => res.status(201).json({ message: "Post disliké" }))
+            .catch((error) =>
+              res.status(500).json({ error: " Erreur update post" })
+            );
+        })
+        .catch((error) =>
+          res.status(400).json({ message: "problème destroy like" })
+        );
+    }
+  })
+  .catch((error) => res.status(400).json({ message: "erreur destroy" }));
 };
 
 //recupérer tous les likes d'un post

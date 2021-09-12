@@ -11,8 +11,7 @@ const Profile = () => {
   const [user, setUser] = useState([]);
   const [posts, setPosts] = useState([]);
   const [displayModification, setDisplayModification] = useState(true);
-  const [displayModificationPassword, setDisplayModificationPassword] =
-    useState(true);
+  const [displayModificationPassword, setDisplayModificationPassword] = useState(true);
 
   const changeDisplayModification = () => {
     setDisplayModification(!displayModification);
@@ -36,24 +35,23 @@ const Profile = () => {
         const token = localStorage.getItem("token");
         const userId = localStorage.getItem("userId");
 
-        axios
-          .delete("http://localhost:3000/api/auth/profile/" + userId, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+        axios.delete("http://localhost:3000/api/auth/profile/" + userId, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          localStorage.clear();
+          return (window.location.href = "/");
+        })
+        .catch((err) => {
+          console.log(err);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
           })
-          .then((res) => {
-            localStorage.clear();
-            return (window.location.href = "/");
-          })
-          .catch((err) => {
-            console.log(err);
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
-            })
-          });
+        });
       }
     });
   };
@@ -62,41 +60,39 @@ const Profile = () => {
     const token = localStorage.getItem("token");
     const userId = localStorage.getItem("userId");
 
-    axios
-      .get("http://localhost:3000/api/auth/profile/" + userId, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        setUser(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-        window.alert(
-          "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
-        );
-      });
+    axios.get("http://localhost:3000/api/auth/profile/" + userId, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => {
+      setUser(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+      window.alert(
+        "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
+      );
+    });
   };
 
   const getAllPostsByUser = () => {
     const token = localStorage.getItem("token");
     const userId = localStorage.getItem("userId");
-    axios
-      .get("http://localhost:3000/api/post/user/" + userId, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        setPosts(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-        alert(
-          "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
-        );
-      });
+    axios.get("http://localhost:3000/api/post/user/" + userId, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => {
+      setPosts(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+      alert(
+        "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
+      );
+    });
   };
 
   useEffect(() => {
@@ -110,26 +106,24 @@ const Profile = () => {
     const formData = new FormData();
     const imagedata = document.querySelector('input[type="file"]').files[0];
     formData.append("image", imagedata);
-
     const token = localStorage.getItem("token");
     const userId = localStorage.getItem("userId");
 
-    axios
-      .put("http://localhost:3000/api/auth/profile/" + userId, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        window.location.reload();
-      })
-      .catch((err) => {
-        console.log(err);
-        window.alert(
-          "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
-        );
-      });
+    axios.put("http://localhost:3000/api/auth/profile/" + userId, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => {
+      window.location.reload();
+    })
+    .catch((err) => {
+      console.log(err);
+      window.alert(
+        "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
+      );
+    });
   };
 
   return (

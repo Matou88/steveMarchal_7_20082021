@@ -19,11 +19,11 @@ exports.createPost = (req, res, next) => {
     likes: 0,
     comments: 0,
   })
-    .then(() => res.status(201).json({ message: "Post enregistré !" }))
-    .catch((error) => {
-      console.log(error.message);
-      return res.status(400).json({ error });
-    });
+  .then(() => res.status(201).json({ message: "Post enregistré !" }))
+  .catch((error) => {
+    console.log(error.message);
+    return res.status(400).json({ error });
+  });
 };
 
 //Modifier un post
@@ -31,45 +31,9 @@ exports.modifyPost = (req, res, next) => {
   const id = req.params.id;
   const userId = identification.userId(req);
   Post.findOne({ where: { id: id } })
-    .then((post) => {
-      if (post.UserId === userId) {
-        if (req.file) {
-          if (post.image !== null) {
-            const fileName = post.image.split("/images/")[1];
-            fs.unlink(`images/${fileName}`, (err) => {
-              if (err) console.log(err);
-              else {
-                console.log("Image supprimée: " + fileName);
-              }
-            });
-          }
-          req.body.image = `${req.protocol}://${req.get("host")}/images/${
-            req.file.filename
-          }`;
-        }
-        post
-          .update({ ...req.body, id: req.params.id })
-          .then(() =>
-            res.status(200).json({ message: "Votre post est modifié !" })
-          )
-          .catch((error) => res.status(400).json({ error }));
-      } else {
-        return res
-          .status(401)
-          .json({ error: "Vous n'avez pas l'autorisation nécessaire !" });
-      }
-    })
-    .catch((error) => res.status(500).json({ error }));
-};
-
-//Supprimer un post
-exports.deletePost = (req, res, next) => {
-  const id = req.params.id;
-  const userId = identification.userId(req);
-
-  Post.findOne({ where: { id: id } })
-    .then((post) => {
-      if (post.UserId == userId) {
+  .then((post) => {
+    if (post.UserId === userId) {
+      if (req.file) {
         if (post.image !== null) {
           const fileName = post.image.split("/images/")[1];
           fs.unlink(`images/${fileName}`, (err) => {
@@ -79,28 +43,64 @@ exports.deletePost = (req, res, next) => {
             }
           });
         }
-        post
-          .destroy({ where: { id: id } })
-          .then(() => res.status(200).json({ message: "post supprimé !" }))
-          .catch((error) => res.status(400).json({ error }));
-      } else {
-        return res
-          .status(401)
-          .json({
-            error:
-              "Vous n'avez pas l'autorisation nécessaire pour supprimer le post  !" +
-              console.log(userId),
-          });
+        req.body.image = `${req.protocol}://${req.get("host")}/images/${
+          req.file.filename
+        }`;
       }
-    })
-    .catch((error) => res.status(500).json({ error }));
+      post
+        .update({ ...req.body, id: req.params.id })
+        .then(() =>
+          res.status(200).json({ message: "Votre post est modifié !" })
+        )
+        .catch((error) => res.status(400).json({ error }));
+    } else {
+      return res
+        .status(401)
+        .json({ error: "Vous n'avez pas l'autorisation nécessaire !" });
+    }
+  })
+  .catch((error) => res.status(500).json({ error }));
+};
+
+//Supprimer un post
+exports.deletePost = (req, res, next) => {
+  const id = req.params.id;
+  const userId = identification.userId(req);
+
+  Post.findOne({ where: { id: id } })
+  .then((post) => {
+    if (post.UserId == userId) {
+      if (post.image !== null) {
+        const fileName = post.image.split("/images/")[1];
+        fs.unlink(`images/${fileName}`, (err) => {
+          if (err) console.log(err);
+          else {
+            console.log("Image supprimée: " + fileName);
+          }
+        });
+      }
+      post
+        .destroy({ where: { id: id } })
+        .then(() => res.status(200).json({ message: "post supprimé !" }))
+        .catch((error) => res.status(400).json({ error }));
+    } else {
+      return res
+        .status(401)
+        .json({
+          error:
+            "Vous n'avez pas l'autorisation nécessaire pour supprimer le post  !" +
+            console.log(userId),
+        });
+    }
+  })
+  .catch((error) => res.status(500).json({ error }));
 };
 
 //Afficher un post
 exports.getOnePost = (req, res, next) => {
   Post.findOne({ where: { id: req.params.id } })
-    .then((post) => res.status(200).json(post))
-    .catch((error) => res.status(404).json({ error }));
+  .then((post) => res.status(200).json(post))
+  .catch((error) => res.status(404).json({ error }));
 };
 
 //Afficher tous les posts
@@ -121,11 +121,11 @@ exports.getAllPosts = (req, res, next) => {
     ],
     order: [["createdAt", "DESC"]],
   })
-    .then((posts) => res.status(200).json(posts))
-    .catch((error) => {
-      console.log(error);
-      res.status(400).json({ error });
-    });
+  .then((posts) => res.status(200).json(posts))
+  .catch((error) => {
+    console.log(error);
+    res.status(400).json({ error });
+  });
 };
 
 exports.getAllPostsByUser = (req, res, next) => {
@@ -137,6 +137,6 @@ exports.getAllPostsByUser = (req, res, next) => {
     },
     order: [["createdAt", "DESC"]],
   })
-    .then((posts) => res.status(200).json(posts))
-    .catch((error) => res.status(500).json({ error }));
+  .then((posts) => res.status(200).json(posts))
+  .catch((error) => res.status(500).json({ error }));
 };

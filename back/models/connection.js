@@ -1,6 +1,4 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const path = require('path');
-const env = process.env.NODE_ENV || 'development';
 
 //connection à la base de données
 const database = new Sequelize(

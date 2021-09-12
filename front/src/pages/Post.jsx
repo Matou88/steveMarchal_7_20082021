@@ -43,29 +43,28 @@ const Post = () => {
       });
     } else {
       const token = localStorage.getItem("token");
-      axios
-        .post("http://localhost:3000/api/post", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((res) => {
-          window.location = "/";
-        })
-        .catch((err) => {
-          console.log(err);
-          window.alert(
-            "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
-          );
-        });
+      axios.post("http://localhost:3000/api/post", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        window.location = "/";
+      })
+      .catch((err) => {
+        console.log(err);
+        window.alert(
+          "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
+        );
+      });
     }
   };
 
   return (
     <div className="post">
       <Navigation />
-      <div >
+      <div>
         <div className="row d-flex justify-content-center">
           <div className="col-10 col-lg-8 mt-5 mx-5 mb-3 rounded bg-profile text-center text-white">
             <h2 className="mt-4 text">Créez votre post</h2>
