@@ -1,9 +1,13 @@
 import React from 'react';
+import Logo1 from './Logo1';
+import Navigation from './Navigation';
 
 const Error404 = () => {
     return (
-        <div>
-            <h1>Erreur 404, la page demandé n'est pas trouvé :(</h1>           
+        <div className="text-center error">
+            <Navigation />
+            <Logo1 />
+            <h1 className="mt-4 bg-light">Erreur, la page demandée n'est pas trouvée :(</h1>           
         </div>
     );
 };

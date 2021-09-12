@@ -1,6 +1,6 @@
 import React from "react";
-import Comments from "../comment/Comment";
-import CommentNew from "../comment/CommentNew";
+import Comments from "../components/comment/Comment";
+import CommentNew from "../components/comment/CommentNew";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -8,7 +8,7 @@ import Moment from "react-moment";
 import Swal from "sweetalert2";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import Navigation from "../Navigation";
+import Navigation from "../components/Navigation";
 
 export default function PostSelected({ match, props }) {
   const location = useLocation(props);

@@ -1,11 +1,11 @@
 import React from "react";
-import PostCard from "../post/PostCard";
+import PostCard from "../components/PostCard";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import avatar from "../../assets/avatar.png"
+import avatar from "../assets/avatar.png"
 import { useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
-import Navigation from "../Navigation";
+import Navigation from "../components/Navigation";
 
 export default function ProfileSelected({ match, props }) {
   const location = useLocation(props);

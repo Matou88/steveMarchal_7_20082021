@@ -1,7 +1,7 @@
 import React from "react";
-import SignIn from "./SignIn";
-import Logo1 from "../Logo1";
-import Navigation from "../Navigation";
+import SignIn from "../components/SignIn";
+import Logo1 from "../components/Logo1";
+import Navigation from "../components/Navigation";
 
 function Authentification() {
   return (
