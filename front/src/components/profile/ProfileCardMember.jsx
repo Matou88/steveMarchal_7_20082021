@@ -16,7 +16,7 @@ export default function ProfileCardMember(props) {
         }}
       >
         <div className="col">
-          <div className="d-flex justify-content-center">
+          <div className="d-flex justify-content-center members">
             <div className="card cardMember mt-2 mx-0 border-0 ">
               <div className="d-flex justify-content-center">
                 {avatarImage === null ? (

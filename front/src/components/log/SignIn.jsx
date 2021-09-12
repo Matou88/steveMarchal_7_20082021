@@ -10,7 +10,7 @@ export default function SignIn() {
   const history = useHistory();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [errors, setErrors] = useState([]);
+  const [errors] = useState([]);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -30,42 +30,42 @@ export default function SignIn() {
           text: "Email ou password incorrect !!",
         });
       });
-    };
+  };
 
-    return (
-      <div className="loginForm">
-          <form action="#" onSubmit={ handleLogin }>
-          {errors['g'] ? (
-                  <div className="login-form__errors">
-                      { errors['g'] }
-                  </div>
-              ) : '' }               
+  return (
+    <div className="loginForm">
+        <form action="#" onSubmit={ handleLogin }>
+        {errors['g'] ? (
+                <div className="login-form__errors">
+                    { errors['g'] }
+                </div>
+            ) : '' }               
 
-              <div className="form-group mb-2">
-                <i className="fas fa-user"><FontAwesomeIcon icon={faEnvelope} /></i>
-                  <label htmlFor="email">Email</label>
-                  <input type="email" name="email" id="email" className="form-control login-input" placeholder="Votre email" value={ email } onChange={ (e) => setEmail(e.target.value) }/>
-              {errors['email'] ? (
-                  <span className="login-form__error">{errors['email']}</span>
-              ) : '' }
-              </div>
+            <div className="form-group mb-2">
+              <i className="fas fa-user"><FontAwesomeIcon icon={faEnvelope} /></i>
+                <label htmlFor="email">Email</label>
+                <input type="email" name="email" id="email" className="form-control login-input" placeholder="Votre email" value={ email } onChange={ (e) => setEmail(e.target.value) }/>
+            {errors['email'] ? (
+                <span className="login-form__error">{errors['email']}</span>
+            ) : '' }
+            </div>
 
-              <div className="form-group mb-2">
-                <i className="fas fa-lock"><FontAwesomeIcon icon={faLock} /></i>
-                <label htmlFor="password">Mot de passe</label>                    
-                <input type="password" name="password" id="password" className="form-control login-input" placeholder="Votre mot de passe" value={ password } onChange={ (e) => setPassword(e.target.value) } />
-                {errors['password'] ? (
-                <span className="login-error">{errors['password']}</span>
-              ) : '' }
+            <div className="form-group mb-2">
+              <i className="fas fa-lock"><FontAwesomeIcon icon={faLock} /></i>
+              <label htmlFor="password">Mot de passe</label>                    
+              <input type="password" name="password" id="password" className="form-control login-input" placeholder="Votre mot de passe" value={ password } onChange={ (e) => setPassword(e.target.value) } />
+              {errors['password'] ? (
+              <span className="login-error">{errors['password']}</span>
+            ) : '' }
 
-              </div>
-              <div className="text-center">
-                  <button type="submit" value="Login" className="btn btn-danger mt-2 mb-2 center btn-block">Se connecter</button>
-              </div>
-          </form>
-          <div className="no-login text-center">
-              <p>Vous n'avez pas encore de compte ? <NavLink to="/signup">Cliquez ici</NavLink></p> 
-          </div>
-      </div>   
-    );    
-  }
+            </div>
+            <div className="text-center">
+                <button type="submit" value="Login" className="btn btn-danger mt-2 mb-2 center btn-block">Se connecter</button>
+            </div>
+        </form>
+        <div className="no-login text-center">
+            <p>Vous n'avez pas encore de compte ? <NavLink to="/signup">Cliquez ici</NavLink></p> 
+        </div>
+    </div>   
+  );    
+}

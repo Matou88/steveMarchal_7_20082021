@@ -51,7 +51,7 @@ export default function CommentNew(props) {
 
             <div className="form-submit mt-2 mb-2">
               <button
-                className="bouton btn  btn-sm mx-5 "
+                className="btn btn-danger btn-block mt-2"
                 onClick={handleSubmitComment}
               >
                 Publier

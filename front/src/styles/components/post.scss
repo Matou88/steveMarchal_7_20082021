@@ -1,0 +1,16 @@
+.post {
+    min-height: 100vh;
+    background-color: $color-3;
+    .text {
+    font-weight: bold;
+    color: $color-1;
+    }
+}
+
+.comment-delete{
+    display: flex;
+    justify-content: space-between;
+    .delete-icon {
+        color: $color-2;
+    }
+}

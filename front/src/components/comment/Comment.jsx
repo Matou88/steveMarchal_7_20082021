@@ -44,20 +44,22 @@ export default function Comments(props) {
   return (
     <div>
       <div className="card text-center mt-1 mb-2 ">
-        <div className="card-header">
+        <div className="card-header comment-delete">
+          <div>
           Posté par {props.user}
           {", "}
           <Moment fromNow>{props.createdAt}</Moment>
+          </div>
           <i
             className={
               userId === localUserId
                 ? "iconeTime"
-                : "displayNone"
+                : "d-none"
             }
           >
             <FontAwesomeIcon
               icon={faTimes}
-              className="fontIconeTime"
+              className="fontIconeTime delete-icon"
               onClick={deleteComment}
             />
           </i>

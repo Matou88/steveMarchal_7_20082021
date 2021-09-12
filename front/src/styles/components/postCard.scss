@@ -1,0 +1,19 @@
+.postCard {
+    background-color: #f2f2f2;
+    color: $color-1;
+    border: 1rem solid $color-2;
+    .card-text {
+        border-top: 2px solid $color-2;
+    }
+    .comment, .heartColor {
+        color: $color-2;
+    }
+
+    .icon-layout{
+        display: flex;
+        flex-flow: row-reverse;
+        div {
+            margin-left: .7em;
+        }
+    }
+}

@@ -85,11 +85,11 @@ export default function ProfileUpdate(props) {
       <div className={props.modProfile ? "displayNone" : "bg-profilepage"}>
         <div className="row d-flex justify-content-center">
           <div className="col-10 col-lg-8 mt-5 mx-5 mb-3 rounded bg-profile text-center text-white">
-            <h5 className="mt-4">Modifiez votre profil</h5>
+            <h2 className="mt-4">Modifiez votre profil</h2>
             <form>
               <Form.Group controlId="exampleForm.ControlTextarea1">
                 <Form.Label className="form-label">
-                  Modifiez Username
+                  Modifiez votre Pseudo
                 </Form.Label>
                 <Form.Control
                   as="textarea"
@@ -100,7 +100,7 @@ export default function ProfileUpdate(props) {
                 />
               </Form.Group>
               <Form.Group controlId="exampleForm.ControlTextarea2">
-                <Form.Label className="form-label">Modifiez Email</Form.Label>
+                <Form.Label className="form-label">Modifiez votre Email</Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={1}
@@ -121,13 +121,13 @@ export default function ProfileUpdate(props) {
               </Form.Group>
               <div className="form-submit">
                 <button
-                  className="bouton btn btn-outline-success btn-sm mx-5 "
+                  className="btn btn-danger btn-block mx-5"
                   onClick={props.funcModification}
                 >
                   Annuler
                 </button>
                 <button
-                  className="bouton btn btn-outline-success btn-sm mx-5 "
+                  className="btn btn-danger btn-block mx-5"
                   onClick={handleSubmitModification}
                 >
                   Enregistrer
@@ -166,13 +166,13 @@ export default function ProfileUpdate(props) {
               </Form.Group>
               <div className="form-submit">
                 <button
-                  className="bouton btn btn-outline-success btn-sm mx-5 "
+                  className="btn btn-danger btn-block mx-5"
                   onClick={props.funcPassword}
                 >
                   Annuler
                 </button>
                 <button
-                  className="bouton btn btn-outline-success btn-sm mx-5 "
+                  className="btn btn-danger btn-block mx-5"
                   onClick={handleRegisterPassword}
                 >
                   Enregistrer

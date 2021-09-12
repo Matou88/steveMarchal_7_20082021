@@ -1,0 +1,24 @@
+.home{
+    background-color: #c2c2c2;
+    .avatar{
+        width: 100%;
+    }
+    .img-profile-selected {
+        object-fit: cover;
+        width: 12em;
+        height: 12em;
+    }
+}
+.cardMember {
+    border-radius: 2em;
+    width: 80%;
+    height: 14em;
+}
+
+.imageMember {
+    object-fit: cover;
+    width: 100%;
+    height: 12em;
+    border-top-left-radius: 2em;
+    border-top-right-radius: 2em;
+}

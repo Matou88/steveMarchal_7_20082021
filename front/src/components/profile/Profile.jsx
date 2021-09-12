@@ -1,13 +1,13 @@
 import React from "react";
 import ProfileUpdate from "./ProfileUpdate";
-import Navbar from "../navbar/NavBar";
 import PostCard from "../post/PostCard";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import avatar from "../../assets/avatar.png"
 import Swal from "sweetalert2";
+import Navigation from "../Navigation";
 
-export default function Profile() {
+const Profile = () => {
   const [user, setUser] = useState([]);
   const [posts, setPosts] = useState([]);
   const [displayModification, setDisplayModification] = useState(true);
@@ -48,9 +48,11 @@ export default function Profile() {
           })
           .catch((err) => {
             console.log(err);
-            window.alert(
-              "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
-            );
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: "Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l'administrateur du site"
+            })
           });
       }
     });
@@ -131,31 +133,31 @@ export default function Profile() {
   };
 
   return (
-    <>
-      <div className="bg-profilepage">
-        <Navbar />
+    <div className="profile">
+      <Navigation />
+      <div>
         <div className="row d-flex justify-content-center">
-          <div className="col-10 col-lg-8 mt-5 mx-5 rounded bg-profile">
-            <div className="avatar rounded-circle mx-auto">
+          <div className="col-10 col-lg-8 mt-5 mx-5 rounded">
+            <div className="avatar rounded-circle text-center">
               {user.image === null ? (
                 <img
-                  className="rounded-circle"
+                  className="rounded-circle img-profile-selected"
                   height="150px"
                   src={avatar}
                   alt="avatar"
                 />
               ) : (
                 <img
-                  className="rounded-circle"
+                  className="rounded-circle img-profile-selected"
                   height="150px"
                   src={user.image}
                   alt="avatar"
                 />
               )}
             </div>
-            <div className="text-center mt-4">
+            <div className="mt-4 text-center image-choice">
               <label className="label-file text-white mb-3" htmlFor="image">
-                Choisir une image
+                Choisir une image de profil
               </label>
               <input
                 name="image"
@@ -166,57 +168,40 @@ export default function Profile() {
                 onChange={handleSubmit}
               ></input>
             </div>
-            <div className="pb-4 pe-4 ps-4 text-center">
-              <h5 className=" text-white mb-4">Informations</h5>
-              <div className="border-bottom text-white mb-2">Username</div>
-              <div className="text-white mb-4">{user.username}</div>
-              <div className="border-bottom text-white mb-2">Email</div>
-              <div className="text-white mb-4">{user.email}</div>
-              <div className="border-bottom text-white mb-2">Biographie</div>
-              <div className="btn_delete text-white mb-4">
-                {user.bio}
-                <i
-                  className="bi bi-pencil-square ms-2"
-                  title="Modifier le poste"
-                ></i>
-              </div>
-
-              <div className="border-bottom text-white mb-2">Mon compte</div>
-              <button
-                className="bouton btn btn-sm mx-5"
-                onClick={changeDisplayModification}
-              >
-                Modifier mon compte
-              </button>
-              <button
-                className="bouton btn btn-sm mx-5"
-                onClick={changeDisplayModificationPassword}
-              >
-                Modifier mon password
-              </button>
-              <div className="bouton btn btn-sm mx-5" onClick={deleteProfil}>
+            <div className="mt-lg-4 pb-4 pe-4 ps-4 text-center bio-summary">
+              <h2 className=" mb-4">Informations</h2>
+              <div className="border-bottom mb-2 fw-bold">Pseudo</div>
+              <div className="mb-4">{user.username}</div>
+              <div className="border-bottom mb-2 fw-bold">Email</div>
+              <div className="mb-4">{user.email}</div>
+              <div className="border-bottom mb-2 fw-bold">Biographie</div>
+              <div className="btn_delete mb-4">{user.bio}</div>
+              <div className="border-bottom mb-2 fw-bold">Mon compte</div>
+              <div className="btn btn-danger btn-block mx-5" onClick={deleteProfil}>
                 Supprimer mon compte
               </div>
             </div>
           </div>
         </div>
       </div>
+      <div className="">
       <ProfileUpdate
         funcModification={changeDisplayModification}
         funcPassword={changeDisplayModificationPassword}
         modProfile={displayModification}
         modPassword={displayModificationPassword}
       />
-      <div className="bg-profilepage">
+      </div>
+      <div>
         <div className="row d-flex justify-content-center">
           <div className="col-10 col-lg-8 mt-5 p-0 mx-5 rounded">
-            <div className="last-post pt-3 pb-3 ms-2 fw-bold">
+            <div className="text-white pt-3 pb-3 ms-2 fw-bold">
               DERNIERS POSTS
             </div>
           </div>
         </div>
       </div>
-      <div className="bg-profilepage">
+      <div>
         <div className="row d-flex justify-content-center">
           <div className="col-10 col-lg-8 p-0 mx-5 mb-3 rounded">
             <div className=" post-list">
@@ -241,6 +226,8 @@ export default function Profile() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
+
+export default Profile;

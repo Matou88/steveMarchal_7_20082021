@@ -1,4 +1,32 @@
-.profile{
-    background-color: $color-3;
-    height: 100vh;
+.profile {
+    background-color: $background;
+    .image-choice {
+        label {
+            margin-right: 1em;
+        }
+    }
+    .delete {
+        color: $color-2;
+        font-weight: bold;
+    }
+    .bio-summary {
+        color: $color-1;
+        background-color: #f2f2f2;
+    }
+    form {
+        color: $color-1;
+        background-color: #f2f2f2;
+    }
+}
+
+.img-profile-selected {
+    object-fit: cover;
+    width: 15em;
+    height: 15em;
+}
+
+.img-profile {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
 }

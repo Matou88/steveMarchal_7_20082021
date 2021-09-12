@@ -37,8 +37,8 @@ export default function PostCard(props) {
   }, []);
 
   return (
-    <>
-      <div className="card">
+    <div className="mx-auto">
+      <div className="card postCard">
         <div className="d-flex justify-content-center">
           {props.image === null ? (
             <div></div>
@@ -48,23 +48,25 @@ export default function PostCard(props) {
         </div>
 
         <div className="card-body">
-          <h5 className="card-title">{props.content}</h5>
+          <h5 className="card-title mb-4">{props.content}</h5>
           <p className="card-text">
-            <span className="date_post text-muted">
+            <span className="date_post fst-italic">
               Posté par {username}
               {", "}
               <Moment fromNow>{props.createdAt}</Moment>
             </span>
           </p>
-          <div>
-            {" "}
-            {comments.length}
-            <FontAwesomeIcon icon={faComments} className="comment" />
-          </div>
-          <div>
-            {" "}
-            {liked}
-            <FontAwesomeIcon icon={faHeart} className="comment heartColor" />
+          <div className="icon-layout">
+            <div>
+              {comments.length}
+              {" "}
+              <FontAwesomeIcon icon={faComments} className="comment" />
+            </div>
+            <div>
+              {liked}
+              {" "}
+              <FontAwesomeIcon icon={faHeart} className="comment heartColor" />
+            </div>
           </div>
           <Link
             to={{
@@ -74,11 +76,11 @@ export default function PostCard(props) {
             className="link"
           >
             <div className="d-flex justify-content-center">
-              <button className="bouton btn btn-sm mx-5 ">Voir le post</button>
+              <button className="btn btn-danger btn-block">Voir le post</button>
             </div>
           </Link>
         </div>
       </div>
-    </>
+    </div>
   );
 }

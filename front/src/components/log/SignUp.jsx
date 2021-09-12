@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faUser, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import Navigation from "../Navigation";
+import Logo1 from "../Logo1";
 
 export default function SignUp(props) {
   const [username, setUsername] = useState("");
@@ -40,7 +41,7 @@ export default function SignUp(props) {
           confirmButtonColor: "#3085d6",
         }).then((result) => {
           if (result.isConfirmed) {
-            props.func();
+            window.location = '/login';
           }
         });
       } catch (e) {
@@ -56,6 +57,10 @@ export default function SignUp(props) {
   return (
     <div className="signup-page">
       <Navigation />
+      <Logo1 />
+      <div className="login-form">
+        <h1 className="login-title text-center mt-4 mb-2">S'inscrire</h1>
+      </div>
       <div className="signupForm">
         <form action="" method="post" noValidate onSubmit={ handleRegister }>
           {errors['g'] ? (

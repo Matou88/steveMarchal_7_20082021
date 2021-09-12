@@ -1,11 +1,11 @@
 import React from "react";
-import NavBar from "../navbar/NavBar";
 import axios from "axios";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import Navigation from "../Navigation";
 
-export default function Post() {
+const Post = () => {
   const [post, setPost] = useState();
   const [modification, setModification] = useState({ content: "" });
   const [selectImage, setSelectImage] = useState(false);
@@ -51,7 +51,7 @@ export default function Post() {
           },
         })
         .then((res) => {
-          window.location = "/Home";
+          window.location = "/";
         })
         .catch((err) => {
           console.log(err);
@@ -63,18 +63,18 @@ export default function Post() {
   };
 
   return (
-    <div>
-      <NavBar />
-      <div className="bg-profilepage">
+    <div className="post">
+      <Navigation />
+      <div >
         <div className="row d-flex justify-content-center">
           <div className="col-10 col-lg-8 mt-5 mx-5 mb-3 rounded bg-profile text-center text-white">
-            <h5 className="mt-4">Créez votre post</h5>
+            <h2 className="mt-4 text">Créez votre post</h2>
             <form>
               <Form.Group
                 controlId="exampleForm.ControlTextarea1"
                 className=" formDimension"
               >
-                <Form.Label className="form-label">Texte à publier</Form.Label>
+                <Form.Label className="text">Texte à publier</Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={5}
@@ -83,14 +83,14 @@ export default function Post() {
                   onChange={handleChange}
                 />
               </Form.Group>
-              <div className="text-center mt-4">
-                <label className="label-file text-white mb-3" htmlFor="image">
+              <div className="text-center text mt-4">
+                <label className="text mb-3 me-4" htmlFor="image">
                   Image à publier
                 </label>
                 <input
                   name="image"
                   id="image"
-                  className="input-file text-white"
+                  className="input-file text"
                   type="file"
                   accept="image/*"
                   onChange={changeSelectImage}
@@ -98,7 +98,7 @@ export default function Post() {
               </div>
               <div className="form-submit">
                 <button
-                  className="bouton btn  btn-sm mx-5"
+                  className="btn btn-danger btn-block mx-5"
                   onClick={handleSubmit}
                 >
                   Publier
@@ -111,3 +111,5 @@ export default function Post() {
     </div>
   );
 }
+
+export default Post;

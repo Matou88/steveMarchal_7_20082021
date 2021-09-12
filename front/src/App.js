@@ -7,20 +7,20 @@ import Post from "./components/post/Post";
 import PostSelected from "./components/post/PostSelected";
 import ProfileSelected from "./components/profile/ProfileSelected";
 import SignUp from "./components/log/SignUp";
-import PrivateRoute from "./components/AuthenticatedRoute";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
     return (
       <>
         <Router>
           <Switch>
-            <Route path="/login" component={ Authentification } />
-            <Route path="/signup" component={ SignUp } />
-            <PrivateRoute path="/" component={ Home } />
-            <PrivateRoute path="/profile" component={ Profile } />
-            <PrivateRoute path="/profileSelected" component={ ProfileSelected } />
-            <PrivateRoute path="/post" component={ Post } />
-            <PrivateRoute path="/postSelected" component={ PostSelected } />
+            <Route path="/login" exact component={ Authentification } />
+            <Route path="/signup" exact component={ SignUp } />
+            <PrivateRoute path="/" exact component={ Home } />
+            <PrivateRoute path="/profile" exact component={ Profile } />
+            <PrivateRoute path="/profileSelected" exact component={ ProfileSelected } />
+            <PrivateRoute path="/post" exact component={ Post } />
+            <PrivateRoute path="/postSelected" exact component={ PostSelected } />
           </Switch>
         </Router>
       </>
@@ -29,4 +29,3 @@ function App() {
 }
 
 export default App;
-

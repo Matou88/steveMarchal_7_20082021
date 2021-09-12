@@ -1,15 +1,10 @@
 .login-page, .signup-page {
     background-color: $color-3;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .no-signup, .no-login {
-    @media (min-width: 992px) {
-        position: absolute;
-        bottom: 2px;
-        left: 50%;
-        transform: translateX(-50%);
-    }
+    margin-top: 1.2em;
 }
 
 .signup, .login-form {

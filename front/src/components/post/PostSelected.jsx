@@ -1,6 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
-import NavBar from "../navbar/NavBar";
 import Comments from "../comment/Comment";
 import CommentNew from "../comment/CommentNew";
 import { useLocation } from "react-router-dom";
@@ -10,6 +8,7 @@ import Moment from "react-moment";
 import Swal from "sweetalert2";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import Navigation from "../Navigation";
 
 export default function PostSelected({ match, props }) {
   const location = useLocation(props);
@@ -136,7 +135,7 @@ export default function PostSelected({ match, props }) {
             },
           })
           .then((res) => {
-            window.location = "/Home";
+            window.location = "/";
           })
           .catch((err) => {
             console.log(err);
@@ -177,11 +176,11 @@ export default function PostSelected({ match, props }) {
   }, []);
 
   return (
-    <>
-      <NavBar />
+    <div className="post">
+      <Navigation />
       <div className="row d-flex justify-content-center">
         <div className=" col-10 col-lg-8 mt-5 mx-5 mb-3 rounded ">
-          <div className="card">
+          <div className="card postCard">
             <div className="d-flex justify-content-center">
               {post.image === null ? (
                 <div></div>
@@ -196,13 +195,6 @@ export default function PostSelected({ match, props }) {
             </div>
             <div className="card-body">
               <h5 className="card-title" key={"content" + postId}>
-                {/* <i className="iconeExclamationPost">
-                  <FontAwesomeIcon
-                    icon={faExclamationTriangle}
-                    className="fontExclamation"
-                    onClick={report}
-                  />
-                </i> */}
                 {post.content}
               </h5>
               <p className="card-text">
@@ -212,7 +204,7 @@ export default function PostSelected({ match, props }) {
                   <Moment fromNow>{post.createdAt}</Moment>
                 </span>
               </p>
-              <div>
+              <div className="text-end">
                 {" "}
                 {likes.length}
                 <FontAwesomeIcon
@@ -225,13 +217,11 @@ export default function PostSelected({ match, props }) {
             <div
               className={
                 userId === localUserId
-                  // ? "d-flex justify-content-center"
-                  // : isAdmin === "true"
                   ? "d-flex justify-content-center"
-                  : "displayNone"
+                  : "d-none"
               }
             >
-              <button className="bouton btn btn-sm mx-5" onClick={deletePost}>
+              <button className="btn btn-danger btn-block mb-4" onClick={deletePost}>
                 Supprimer le post
               </button>
             </div>
@@ -240,7 +230,7 @@ export default function PostSelected({ match, props }) {
           <div
             className={
               comments.length === 0
-                ? "displayNone"
+                ? "d-none"
                 : " mt-2 p-2 pb-1 px-3 comments"
             }
           >
@@ -258,6 +248,6 @@ export default function PostSelected({ match, props }) {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

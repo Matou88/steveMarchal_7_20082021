@@ -31,7 +31,7 @@ const PrivateRoute = ({ path, component }) => {
     return null;
   }
 
-  return (!validToken?
+  return (!validToken ?
       <Redirect to="/login" /> :
       <Route path={path} component={component} />
   );
