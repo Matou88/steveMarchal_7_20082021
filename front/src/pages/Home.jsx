@@ -71,10 +71,10 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <div className="home">
       <Navigation />
-      <div className="row justify-content-center ms-2 home">
-        <div className="col-12 col-lg-3">
+      <div className="row justify-content-center">
+        <div className="col-12 col-lg-3 mx-auto">
           <div>
             <ProfileCard name={user.username} image={user.image} />
           </div>
@@ -94,7 +94,7 @@ export default function Home() {
           <div className="pt-3 pb-3 ms-2 fw-bold">DERNIERS POSTS</div>
           <div className="post-list">
             {posts.map((post) => (
-              <div className="border rounded ms-2 mb-4 bg-white" key={post.id}>
+              <div className="border rounde mb-4" key={post.id}>
                 <PostCard
                   content={post.content}
                   image={post.image}

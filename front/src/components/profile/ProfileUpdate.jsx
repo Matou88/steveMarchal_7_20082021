@@ -120,13 +120,13 @@ export default function ProfileUpdate(props) {
               </Form.Group>
               <div className="form-submit">
                 <button
-                  className="btn btn-danger btn-block mx-5"
+                  className="btn btn-danger btn-block mt-2 mb-2"
                   onClick={props.funcModification}
                 >
                   Annuler
                 </button>
                 <button
-                  className="btn btn-danger btn-block mx-5"
+                  className="btn btn-danger btn-block mt-2 mb-2"
                   onClick={handleSubmitModification}
                 >
                   Enregistrer
@@ -165,13 +165,13 @@ export default function ProfileUpdate(props) {
               </Form.Group>
               <div className="form-submit">
                 <button
-                  className="btn btn-danger btn-block mx-5"
+                  className="btn btn-danger btn-block mt-2 mb-2"
                   onClick={props.funcPassword}
                 >
                   Annuler
                 </button>
                 <button
-                  className="btn btn-danger btn-block mx-5"
+                  className="btn btn-danger btn-block mt-2 mb-2"
                   onClick={handleRegisterPassword}
                 >
                   Enregistrer

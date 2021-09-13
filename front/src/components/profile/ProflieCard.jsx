@@ -3,8 +3,8 @@ import avatar from "../../assets/avatar.png"
 
 function ProfileCard({ name, image }) {
   return (
-    <div className="profile_card ms-2 ">
-      <div className="col bg-dark p-3 mb-4">
+    <div className="profile_card ms-lg-2">
+      <div className="profile_card bg-dark p-3 mb-4">
         <div className="text-center text-white">
           <div className="avatar rounded-circle">
             {image === null ? (

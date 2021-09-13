@@ -12,8 +12,10 @@ $background: #656565;
     font-display: swap;
 }
 
-* {
-    font-family: rubik;
+@media (min-width: 992px) {
+    * {
+        font-family: rubik;
+    }
 }
 
 a {
