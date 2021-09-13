@@ -1,33 +1,3 @@
-// const db = require('../models');
-
-// exports.deleteComment = (req, res, next) => {
-//     if (res.locals.userRoles.includes('ADMIN')) {
-//         db.Comment.destroy({ where: { id: req.params.id } })
-//             .then(() => res.status(200).json({ message: 'Post supprimé !' }))
-//             .catch(error => res.status(404).json({ error }))
-//     } else {
-//         return res.status(403).json({ error: 'Vous ne disposez pas de droits suffisants' })
-//     }
-// }
-
-// exports.createComment = (req, res, next) => {
-//     db.Post.findOne({ where: { id: req.body.postId } })
-//         .then(post => {           
-//             if (!post) {
-//                 return res.status(404).json({ error: 'Post introuvable !' })
-//             }
-
-//             db.Comment.create({
-//                 message: req.body.message,
-//                 ownerId: res.locals.userId,
-//                 postId: post.id
-//             })
-//                 .then(comment => res.status(201).json({ comment }))
-//                 .catch(error => res.status(400).json({ error }))
-//         })
-//         .catch(error => res.status(400).json({ error }))
-// }
-
 const { User, Post, Comment, Like } = require("../models/index");
 const identification = require("../utils/identification");
 
@@ -66,34 +36,37 @@ exports.createComment = (req, res, next) => {
 exports.deleteComment = (req, res, next) => {
   const id = req.params.id;
   const userId = identification.userId(req);
+  const isAdmin = identification.isAdmin(req);
   Comment.findOne({ where: { id: id } })
-  .then((comment) => {
-    if (comment.userId == userId) {
-      Post.findOne({ where: { id: comment.postId } }).then((post) => {
-        post.update(
-          {
-            comments: post.comments - 1, //on supprime 1 au comments
-          },
-          { id: comment.postId }
-        )
-        .then(() =>
-          res.status(200).json({ message: "Commentaire supprimé !" })
-        )
-        .catch((error) => res.status(400).json({ error }));
-      }),
-      comment
-        .destroy({ where: { id: id } })
-        .catch((error) => res.status(400).json({ error }));
-    } else {
-      return res
-      .status(401)
-      .json({ error: "Vous n'avez pas l'autorisation nécessaire !" });
-    }
-  })
-  .catch((error) =>
-    res.status(500).json({ error: "Le commentaire recherché n'existe pas" })
-  );
+    .then((comment) => {
+      if (comment.userId == userId || isAdmin == true) {
+        Post.findOne({ where: { id: comment.postId } }).then((post) => {
+          post
+            .update(
+              {
+                comments: post.comments - 1, //on supprime 1 au comments
+              },
+              { id: comment.postId }
+            )
+            .then(() =>
+              res.status(200).json({ message: "Commentaire supprimé !" })
+            )
+            .catch((error) => res.status(400).json({ error }));
+        }),
+          comment
+            .destroy({ where: { id: id } })
+            .catch((error) => res.status(400).json({ error }));
+      } else {
+        return res
+          .status(401)
+          .json({ error: "Vous n'avez pas l'autorisation nécessaire !" });
+      }
+    })
+    .catch((error) =>
+      res.status(500).json({ error: "Le commentaire recherché n'existe pas" })
+    );
 };
+
 
 //Afficher tous les commentaires d'un post
 exports.getComments = (req, res, next) => {

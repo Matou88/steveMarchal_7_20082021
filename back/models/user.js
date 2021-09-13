@@ -17,6 +17,10 @@ const User = database.define(
     password: DataTypes.STRING,
     image: DataTypes.STRING,
     bio: DataTypes.STRING,
+    is_admin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   },
   {
     Sequelize,

@@ -16,6 +16,7 @@ export default function PostSelected({ match, props }) {
   const username = location.state?.username;
   const userId = location.state?.userId;
   const localUserId = Number(localStorage.getItem("userId"));
+  const isAdmin = localStorage.getItem("is_admin");
 
   const [post, setPost] = useState([]);
   const [comments, setComments] = useState([]);
@@ -210,8 +211,10 @@ export default function PostSelected({ match, props }) {
             <div
               className={
                 userId === localUserId
-                  ? "d-flex justify-content-center"
-                  : "d-none"
+                ? "d-flex justify-content-center"
+                : isAdmin === "true"
+                ? "d-flex justify-content-center"
+                : "d-none"
               }
             >
               <button className="btn btn-danger btn-block mb-4" onClick={deletePost}>

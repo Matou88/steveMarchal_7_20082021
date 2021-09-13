@@ -10,6 +10,7 @@ import Navigation from "../components/Navigation";
 export default function ProfileSelected({ match, props }) {
   const location = useLocation(props);
   const userId = location.state?.userId;
+  const isAdmin = localStorage.getItem("is_admin");
   const [user, setUser] = useState([]);
   const [posts, setPosts] = useState([]);
 
@@ -51,7 +52,7 @@ export default function ProfileSelected({ match, props }) {
           },
         })
         .then((res) => {
-          return (window.location.href = "/home");
+          return (window.location.href = "/");
         })
         .catch((err) => {
           console.log(err);
@@ -125,9 +126,15 @@ export default function ProfileSelected({ match, props }) {
                 {user.bio}
                 <i className="bi bi-pencil-square ms-2" title="Modifier le poste"></i>
               </div>
+              <div className={isAdmin === "true" ? "" : "d-none"}>
+                <div className="btn btn-danger btn-block mt-2 mb-2" onClick={deleteProfil}>
+                  Supprimer le compte
+                </div>
+              </div>
             </div>
           </div>
         </div>
+
         <div>
           <div className="row d-flex justify-content-center">
             <div className="col-10 col-lg-8 mt-5 p-0 mx-5 rounded">

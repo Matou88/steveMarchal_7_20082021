@@ -55,12 +55,13 @@ exports.login = (req, res, next) => {
         res.status(200).json({
           userId: user.id,
           token: jwt.sign(
-            { userId: user.id },
+            { userId: user.id, is_admin: user.is_admin },
             process.env.TKN,
             {
               expiresIn: "24h",
             }
           ),
+          is_admin: user.is_admin,
         });
       })
       .catch((error) => res.status(500).json({ error }));
@@ -160,7 +161,9 @@ exports.getAllProfile = (req, res, next) => {
 exports.deleteUser = (req, res, next) => {
   const id = JSON.parse(req.params.id);
   const userId = identification.userId(req);
-  if (id === userId) {
+  const isAdmin = identification.isAdmin(req);
+
+  if (id === userId || isAdmin) {
     User.findOne({ where: { id: id } })
     .then((user) => {
       if (user.image !== null) {

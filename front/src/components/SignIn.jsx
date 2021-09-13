@@ -19,6 +19,7 @@ export default function SignIn() {
       console.log(res);
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("userId", res.data.userId);
+      localStorage.setItem("is_admin", res.data.is_admin);
       history.replace('/');
     })
     .catch((err) => {

@@ -66,34 +66,36 @@ exports.modifyPost = (req, res, next) => {
 exports.deletePost = (req, res, next) => {
   const id = req.params.id;
   const userId = identification.userId(req);
+  const isAdmin = identification.isAdmin(req);
 
   Post.findOne({ where: { id: id } })
-  .then((post) => {
-    if (post.UserId == userId) {
-      if (post.image !== null) {
-        const fileName = post.image.split("/images/")[1];
-        fs.unlink(`images/${fileName}`, (err) => {
-          if (err) console.log(err);
-          else {
-            console.log("Image supprimée: " + fileName);
-          }
-        });
+    .then((post) => {
+      console.log(isAdmin);
+      if (post.UserId == userId || isAdmin) {
+        if (post.image !== null) {
+          const fileName = post.image.split("/images/")[1];
+          fs.unlink(`images/${fileName}`, (err) => {
+            if (err) console.log(err);
+            else {
+              console.log("Image supprimée: " + fileName);
+            }
+          });
+        }
+        post
+          .destroy({ where: { id: id } })
+          .then(() => res.status(200).json({ message: "post supprimé !" }))
+          .catch((error) => res.status(400).json({ error }));
+      } else {
+        return res
+          .status(401)
+          .json({
+            error:
+              "Vous n'avez pas l'autorisation nécessaire pour supprimer le post  !" +
+              console.log(userId),
+          });
       }
-      post
-        .destroy({ where: { id: id } })
-        .then(() => res.status(200).json({ message: "post supprimé !" }))
-        .catch((error) => res.status(400).json({ error }));
-    } else {
-      return res
-        .status(401)
-        .json({
-          error:
-            "Vous n'avez pas l'autorisation nécessaire pour supprimer le post  !" +
-            console.log(userId),
-        });
-    }
-  })
-  .catch((error) => res.status(500).json({ error }));
+    })
+    .catch((error) => res.status(500).json({ error }));
 };
 
 //Afficher un post

@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 
 export default function Comments(props) {
   const localUserId = Number(localStorage.getItem("userId"));
+  const isAdmin = localStorage.getItem("is_admin");
   const token = localStorage.getItem("token");
   const userId = props.userId;
 
@@ -51,8 +52,10 @@ export default function Comments(props) {
           </div>
           <i
             className={ userId === localUserId
-                ? "iconeTime"
-                : "d-none"
+              ? "iconeTime"
+              : isAdmin === "true"
+              ? "iconeTime"
+              : "d-none"
             }
           >
             <FontAwesomeIcon
