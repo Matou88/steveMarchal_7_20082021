@@ -33,8 +33,10 @@ Pour le profil Administrateur, tapez dans le terminal :
 ```
 
 les identifiants de bases du profil sont : 
-admin@gmail.com
-GroupoAdmin357!
+
+Adresse mail : admin@gmail.com
+
+Mot de passe : GroupoAdmin357!
 
 Et enfin :
 ```bash
