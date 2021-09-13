@@ -34,7 +34,7 @@ export default function ProfileCardMember(props) {
                 )}
               </div>
               <div className="card-body d-flex justify-content-center p-0 mt-2 text-secondary">
-                <p className="card-title ">{props.user.username}</p>
+                <p className="card-title profile-card-name">{props.user.username}</p>
               </div>
             </div>
           </div>

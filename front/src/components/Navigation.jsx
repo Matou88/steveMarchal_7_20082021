@@ -4,7 +4,7 @@ import LogoImg from '../assets/3.svg';
 import Swal from "sweetalert2";
 import jwt_decode from "jwt-decode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faPowerOff } from "@fortawesome/free-solid-svg-icons";
 
 const Navigation = () => {
     const history = useHistory();
@@ -76,16 +76,16 @@ const Navigation = () => {
                 </div>
                 <div className="col-12 col-lg-8 nav-link">
                     <nav className="navbar navbar-expand-lg navbar-light align-self-lg-end">
-                        <NavLink to="/" exact className="nav-item active items" activeClassName="nav-active">
+                        <NavLink to="/" exact className="nav-item active items" aria-label="Accueil" activeClassName="nav-active">
                             Accueil
                         </NavLink>
-                        <NavLink exact to="/post" className="nav-item active items" activeClassName="nav-active">
+                        <NavLink exact to="/post" className="nav-item active items" aria-label="Nouveau Post" activeClassName="nav-active">
                             Post
                         </NavLink>
-                        <NavLink to={"/profile"} className="nav-item active items" activeClassName="nav-active">
+                        <NavLink to={"/profile"} className="nav-item active items" aria-label="Profil" activeClassName="nav-active">
                             Profil
                         </NavLink>
-                        <i><FontAwesomeIcon icon={faTimes} className="fontIconeTime delete-icon" onClick={Logout} /></i>
+                        <FontAwesomeIcon icon={faPowerOff} className="signout-icon" aria-label="Se déconnecter" onClick={Logout} />
                     </nav>
                 </div>
             </div>

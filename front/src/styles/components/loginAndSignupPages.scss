@@ -8,6 +8,8 @@
 }
 
 .signup, .login-form {
+    width: 80%;
+    margin: auto;
     @media (min-width: 992px) {
         width: 70%;
         margin: auto;

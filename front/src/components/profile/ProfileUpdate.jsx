@@ -139,10 +139,10 @@ export default function ProfileUpdate(props) {
       <div className={props.modPassword ? "displayNone" : "bg-profilepage"}>
         <div className="row d-flex justify-content-center">
           <div className="col-10 col-lg-8 mt-5 mx-5 mb-3 rounded bg-profile text-center text-white">
-            <h5 className="mt-4">Modifiez votre password</h5>
+            <h5 className="mt-4">Modifiez votre mot de passe</h5>
             <form>
               <Form.Group controlId="formBasicPassword1">
-                <Form.Label className="form-label">Nouveau password</Form.Label>
+                <Form.Label className="form-label">Nouveau mot de passe</Form.Label>
                 <Form.Control
                   type="password"
                   rows={1}
@@ -153,7 +153,7 @@ export default function ProfileUpdate(props) {
               </Form.Group>
               <Form.Group controlId="formBasicPassword2">
                 <Form.Label className="form-label">
-                  Confirmez nouveau password
+                  Confirmez nouveau mot de passe
                 </Form.Label>
                 <Form.Control
                   type="password"

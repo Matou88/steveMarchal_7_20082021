@@ -97,7 +97,7 @@ const Post = () => {
               </div>
               <div className="form-submit">
                 <button
-                  className="btn btn-danger btn-block mx-5"
+                  className="btn btn-danger btn-block mt-4"
                   onClick={handleSubmit}
                 >
                   Publier

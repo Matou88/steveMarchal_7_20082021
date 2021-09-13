@@ -36,7 +36,7 @@ export default function SignUp(props) {
         });
         Swal.fire({
           title: "Création de compte réussie",
-          confirmButtonText: `SignIn`,
+          confirmButtonText: `S'identifier`,
           confirmButtonColor: "#3085d6",
         }).then((result) => {
           if (result.isConfirmed) {
@@ -62,25 +62,25 @@ export default function SignUp(props) {
       </div>
       <div className="signupForm">
         <form action="" method="post" noValidate onSubmit={ handleRegister }>  
-          <div className="form-group mx-2 mb-2 mb-lg-4">
+          <div className="form-group mx-auto mb-lg-4 signup">
             <i className="fas fa-user"><FontAwesomeIcon icon={faUser} /></i>
             <label for="username">Nom d'utilisateur</label> 
             <input type="text" name="username" id="username" className="form-control text-primary" placeholder="Votre Pseudo" value={ username } onChange={ (e) => setUsername(e.target.value) }/>
           </div>
 
-          <div className="form-group mx-2 mb-2 mb-lg-4">
+          <div className="form-group mx-auto mb-2 mb-lg-4 signup">
             <i className="fas fa-envelope"><FontAwesomeIcon icon={faEnvelope} /></i>
             <label for="email">Email</label>
             <input type="email" name="email" id="email" className="form-control text-primary" placeholder="Votre email" value={ email } onChange={ (e) => setEmail(e.target.value)}/>                   
           </div>
 
-          <div className="form-group mx-2 mb-2 mb-lg-4">
+          <div className="form-group mx-auto mb-2 mb-lg-4 signup">
             <i className="fas fa-lock"><FontAwesomeIcon icon={faLock} /></i>
             <label for="password">Mot de passe</label>                    
             <input type="password" name="password" id="password" className="form-control text-primary" placeholder="Votre Mot de passe" value={ password } onChange={ (e) => setPassword(e.target.value) }/>
           </div>
 
-          <div className="form-group mx-2 mb-2 mb-lg-4">
+          <div className="form-group signup mx-auto mb-2 mb-lg-4">
             <i className="fas fa-lock"><FontAwesomeIcon icon={faLock} /></i>
             <label for="password">Confirmer mot de passe</label>                    
             <input type="password" name="Control-password" id="password" className="form-control text-primary" placeholder="Veuillez ressaisir votre Mot de passe" value={controlPassword} onChange={ (e) => setControlPassword(e.target.value) }/>
