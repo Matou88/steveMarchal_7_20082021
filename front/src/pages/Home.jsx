@@ -5,13 +5,19 @@ import ProfileCard from "../components/profile/ProflieCard";
 import ProfileCardMember from "../components/profile/ProfileCardMember";
 import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Navigation from "../components/Navigation";
 
 export default function Home() {
   const [users, setUsers] = useState([]);
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState([]);
+  const history = useHistory();
+
+  const routeChange = () =>{ 
+    let path = `./post`; 
+    history.push(path);
+  }
 
   const getOneProfile = () => {
     const token = localStorage.getItem("token");
@@ -86,11 +92,9 @@ export default function Home() {
           </div>
         </div>
         <div className="col-12 col-lg-9">
-          <Link to="/post" className="link">
-            <div className="d-flex justify-content-center">
-              <button className="btn btn-danger btn-block mt-4">Publier un post</button>
-            </div>
-          </Link>
+          <div className="d-flex justify-content-center">
+            <button className="btn btn-danger btn-block mt-4" onClick={routeChange}>Publier un post</button>
+          </div>
           <div className="pt-3 pb-3 ms-2 fw-bold">DERNIERS POSTS</div>
           <div className="post-list">
             {posts.map((post) => (
