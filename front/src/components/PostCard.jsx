@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComments, faHeart } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import Moment from "react-moment";
+import 'moment/locale/fr';
 
 export default function PostCard(props) {
   const postId = props.postId;
@@ -52,7 +53,7 @@ export default function PostCard(props) {
             <span className="date_post fst-italic">
               Posté par {username}
               {", "}
-              <Moment fromNow>{props.createdAt}</Moment>
+              <Moment fromNow locale="fr">{props.createdAt}</Moment>
             </span>
           </p>
           <div className="icon-layout">
